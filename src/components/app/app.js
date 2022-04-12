@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import nextId from "react-id-generator";
+import { setPrefix } from "react-id-generator";
 
 import AppInfo from "../app-info/app-info";
 import SearchPanel from "../search-panel/search-panel";
@@ -13,12 +15,12 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                {name: 'Петр И.', salary: 700, increase: false, id: 1},
-                {name: 'Юлия H.', salary: 3000, increase: true, id: 2},
-                {name: 'Алиса Г.', salary: 2000, increase: true, id: 3},
+                {name: 'Петр И.', salary: 700, increase: false, id: +nextId()},
+                {name: 'Юлия H.', salary: 3000, increase: true, id: +nextId()},
+                {name: 'Алиса Г.', salary: 2000, increase: true, id: +nextId()},
             ]
-        }
-        this.maxId = 4;
+        }        
+        setPrefix("");
     }
     
     deleteItem = (id) => {
@@ -34,7 +36,7 @@ class App extends Component {
                 name,
                 salary,
                 increase: false,
-                id: this.maxId++
+                id: +nextId()
         }
         this.setState(({data}) => {
             const newArr = [...data, newItem];
