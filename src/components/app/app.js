@@ -21,7 +21,7 @@ class App extends Component {
             ]
         }        
         setPrefix("");
-    }
+    }   
     
     deleteItem = (id) => {
         this.setState(({data}) => {
@@ -47,7 +47,7 @@ class App extends Component {
         })
     }
 
-    OnToggleIncrease = (id) => {
+    onToggleIncrease = (id) => {
         // this.setState(({data}) => {
         //     const index = data.findIndex(elem => elem.id === id);
 
@@ -69,7 +69,7 @@ class App extends Component {
         }))
     }
 
-    OnToggleRise = (id) => {
+    onToggleRise = (id) => {
         this.setState(({data}) => ({
             data: data.map(item => {
                 if (item.id === id) {
@@ -78,12 +78,15 @@ class App extends Component {
                 return item;
             })
         }))
-    }
+    }    
 
     render() {
+        const employees = this.state.data.length;
+        const increased = this.state.data.filter(item => item.increase).length;
         return (
             <div className="app">
-                <AppInfo />
+                <AppInfo employees={employees}
+                         increased={increased}/>
 
                 <div className="search-panel">
                     <SearchPanel />
@@ -93,8 +96,8 @@ class App extends Component {
                 <EmployeesList 
                     data={this.state.data}
                     onDelete={this.deleteItem}
-                    OnToggleIncrease={this.OnToggleIncrease}
-                    OnToggleRise={this.OnToggleRise}/>
+                    onToggleIncrease={this.onToggleIncrease}
+                    onToggleRise={this.onToggleRise}/>
                 <EmployeesAddForm onAdd={this.addItem}/>
             </div>
     )
